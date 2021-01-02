@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The project I will use what I learned about [Nest](https://github.com/nestjs/nest) and what I already knew.
 
 ## Installation
 
@@ -58,16 +58,11 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Social Media
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- Instagram - [Hulusi Onel](https://www.instagram.com/hulusionel)
+- Twitter - [@HulusiOnel](https://twitter.com/hulusionel)
 
-## Stay in touch
+## Mail
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Gmail - [Hulusi Onel](hulusi.onel@gmail.com)
