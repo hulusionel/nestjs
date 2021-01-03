@@ -1,6 +1,6 @@
 import { IsNotEmpty, MinLength, MaxLength, IsEmail } from 'class-validator';
 
-import { personalInformation } from '../../constants/validation-constants';
+import { personalInformation } from '../../constants';
 
 export class UserCreateDto {
   @IsNotEmpty()
