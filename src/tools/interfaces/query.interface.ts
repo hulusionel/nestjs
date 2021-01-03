@@ -1,4 +1,4 @@
-export interface IListParams {
+export interface IQueryParams {
   limit: number;
   offset: number;
   fields?: string;

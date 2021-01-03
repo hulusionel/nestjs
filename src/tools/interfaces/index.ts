@@ -1,2 +1,3 @@
-// import * from './statuses.interface';
-// import * from './user.interface';
+export * from './statuses.interface';
+export * from './user.interface';
+export * from './query.interface';
