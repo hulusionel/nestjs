@@ -11,35 +11,35 @@ import {
 import { UserService } from './user.service';
 import { GetParamsDto, UserCreateDto, UserUpdateDto } from '../tools/dtos';
 
-@Controller('user')
+@Controller('userNest')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() createUserDto: UserCreateDto) {
-    return this.userService.create(createUserDto);
+  async create(@Body() createUserDto: UserCreateDto) {
+    return await this.userService.create(createUserDto);
   }
 
   @Get()
-  findAll(@Query() params: GetParamsDto) {
-    return this.userService.findAll(params);
+  async findAll(@Query() params: GetParamsDto) {
+    return await this.userService.findAll(params);
   }
 
   @Get(':userId')
-  findOne(@Param('userId') userId: string) {
-    return this.userService.findOne(userId);
+  async findOne(@Param('userId') userId: string) {
+    return await this.userService.findOne(userId);
   }
 
   @Patch(':userId')
-  updateUserById(
+  async updateUserById(
     @Param('userId') userId: string,
     @Body() updateUserDto: UserUpdateDto,
   ) {
-    return this.userService.updateUserById(userId, updateUserDto);
+    return await this.userService.updateUserById(userId, updateUserDto);
   }
 
   @Delete(':userId')
-  deleteUserById(@Param('userId') userId: string) {
-    return this.userService.deleteUserById(userId);
+  async deleteUserById(@Param('userId') userId: string) {
+    return await this.userService.deleteUserById(userId);
   }
 }

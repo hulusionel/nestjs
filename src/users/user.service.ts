@@ -11,19 +11,19 @@ export class UserService {
     return this.usersRepository.create(createUserDto);
   }
 
-  public findAll(params: IQueryParams) {
-    return this.usersRepository.find(params);
+  async findAll(params: IQueryParams) {
+    return await this.usersRepository.findAll(params);
   }
 
-  public findOne(id: string) {
-    return this.usersRepository.findOne(id);
+  async findOne(id: string) {
+    return await this.usersRepository.findOne(id);
   }
 
-  public updateUserById(id: string, data: UserUpdateDto) {
-    return this.usersRepository.updateUserById(id, data);
+  async updateUserById(id: string, data: UserUpdateDto) {
+    return await this.usersRepository.updateUserById(id, data);
   }
 
-  public async deleteUserById(id: string) {
-    return this.usersRepository.updateUserById(id, new UserDeleteDto());
+  async deleteUserById(id: string) {
+    return await this.usersRepository.updateUserById(id, new UserDeleteDto());
   }
 }
