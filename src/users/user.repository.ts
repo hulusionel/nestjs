@@ -1,41 +1,56 @@
 import { Injectable } from '@nestjs/common';
-// import { InjectModel } from '@nestjs/mongoose';
-// import { Model, FilterQuery } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model, FilterQuery } from 'mongoose';
+import { AuditModel } from 'tools/models';
 
 import { UserCreateDto, UserUpdateDto } from '../tools/dtos';
 import { IUser, Statuses, IQueryParams } from '../tools/interfaces';
-
-const result = [];
 
 @Injectable()
 export class UsersRepository {
   // private readonly statusFilter: FilterQuery<unknown>;
 
-  /* constructor(@InjectModel('user') private userModel: Model<IUser>) {
-    this.statusFilter = {
+  constructor(@InjectModel('userNest') private userModel: Model<IUser>) {
+    /* this.statusFilter = {
       status: {
         $ne: Statuses.DELETED,
       },
-    };
-  } */
+    }; */
+  }
 
   public async create(createUserDto: UserCreateDto) {
-    //const createdUser = new this.userModel(createUserDto);
-    const createUser = result.push(createUserDto);
-    // return await createdUser.save();
-    console.log('deneme:', createUserDto);
-    return createUser;
+    const audit = new AuditModel();
+    audit.active = true;
+    audit.createdBy = 'Admin';
+    audit.createdAt = new Date();
+    const createdUser = new this.userModel({ ...createUserDto, ...audit });
+
+    return await createdUser.save();
   }
 
-  public find({ limit, offset, fields }: IQueryParams) {
-    return result;
+  async findAll({ limit, offset, fields }: IQueryParams) {
+    return await this.userModel
+      .find()
+      .limit(limit)
+      .skip(offset)
+      .select(fields)
+      .sort({ createdAt: -1 })
+      .exec();
   }
 
-  public findOne(_id: string) {
-    return result;
+  async findOne(_id: string) {
+    const query = {
+      _id,
+    };
+    return await this.userModel.findOne(query).exec();
   }
 
-  public updateUserById(_id: string, data: UserUpdateDto) {
-    return result;
+  async updateUserById(_id: string, data: UserUpdateDto) {
+    const query = {
+      _id,
+    };
+    return await this.userModel
+      .findByIdAndUpdate(query, data, { new: true })
+      .exec();
   }
 }

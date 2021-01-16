@@ -1,12 +1,14 @@
+import { Document } from 'mongoose';
+import { AuditModel, RoleModel } from 'tools/models';
 import { Statuses } from './statuses.interface';
 
-export interface IUser {
+export interface IUser extends Document {
   name: string;
   surname: string;
   status: Statuses;
   password: string;
-  roles: string[];
-  createdAt?: Date;
-  updatedAt?: Date;
-  deletedAt?: Date;
+  hashedPassword: string;
+  mail: string;
+  roles: RoleModel[];
+  audit: AuditModel[];
 }

@@ -1,5 +1,1 @@
-export enum Statuses {
-  DELETED,
-  INACTIVE,
-  ACTIVE,
-}
+export enum Statuses {}
