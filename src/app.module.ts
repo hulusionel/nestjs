@@ -6,10 +6,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://Admin:admin1234@cluster0.sp60w.mongodb.net/test?retryWrites=true&w=majority',
-      { useFindAndModify: false },
-    ),
+    MongooseModule.forRoot('asd', { useFindAndModify: false }),
     UserModule,
   ],
   controllers: [AppController],
