@@ -1,6 +1,6 @@
 import { IsNotEmpty, MinLength, MaxLength, IsEmail } from 'class-validator';
 import { AuditModel, RoleModel } from 'tools/models';
-import { Statuses } from '../interfaces';
+import { Statuses } from '../../constants';
 
 import { personalInformation } from '../../constants';
 
@@ -20,8 +20,6 @@ export class UserCreateDto {
 
   @IsEmail()
   mail: string;
-
-  status: Statuses;
 }
 
 export class UserLoginDto {
@@ -57,6 +55,6 @@ export class UserUpdateDto {
 }
 
 export class UserDeleteDto extends UserUpdateDto {
-  status: Statuses;
+  status: Statuses.DELETED;
   deletedAt = new Date();
 }

@@ -6,7 +6,6 @@ import {
   Param,
   Query,
   Patch,
-  Delete,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { GetParamsDto, UserCreateDto, UserUpdateDto } from '../tools/dtos';
@@ -38,8 +37,13 @@ export class UserController {
     return await this.userService.updateUserById(userId, updateUserDto);
   }
 
-  @Delete(':userId')
-  async deleteUserById(@Param('userId') userId: string) {
-    return await this.userService.deleteUserById(userId);
+  @Patch(':userId/activate')
+  async activateUserById(@Param('userId') userId: string) {
+    return await this.userService.activateUserById(userId);
+  }
+
+  @Patch(':userId/deactivate')
+  async deactivateUserById(@Param('userId') userId: string) {
+    return await this.userService.deactivateUserById(userId);
   }
 }

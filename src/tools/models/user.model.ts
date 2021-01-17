@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import { Statuses } from '../interfaces';
+import { Statuses } from '../../constants';
 
 import { AuditModel } from './audit.model';
 import { RoleModel } from './role.model';
@@ -19,7 +19,7 @@ export class UserModel {
 export const UserSchema = new mongoose.Schema({
   name: String,
   surname: String,
-  status: Statuses,
+  status: String,
   password: Number,
   mail: String,
   roles: Array,
