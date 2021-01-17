@@ -4,33 +4,38 @@ import { Model, FilterQuery } from 'mongoose';
 import { AuditModel } from 'tools/models';
 
 import { UserCreateDto, UserUpdateDto } from '../tools/dtos';
-import { IUser, Statuses, IQueryParams } from '../tools/interfaces';
+import { IUser, IQueryParams } from '../tools/interfaces';
+import { Statuses } from '../constants';
 
 @Injectable()
 export class UsersRepository {
-  // private readonly statusFilter: FilterQuery<unknown>;
+  private readonly statusFilter: FilterQuery<unknown>;
 
   constructor(@InjectModel('userNest') private userModel: Model<IUser>) {
-    /* this.statusFilter = {
+    this.statusFilter = {
       status: {
         $ne: Statuses.DELETED,
       },
-    }; */
+    };
   }
 
-  public async create(createUserDto: UserCreateDto) {
+  public async create(createUserDto: UserCreateDto, status: Statuses) {
     const audit = new AuditModel();
     audit.active = true;
     audit.createdBy = 'Admin';
     audit.createdAt = new Date();
-    const createdUser = new this.userModel({ ...createUserDto, ...audit });
+    const createdUser = new this.userModel({
+      ...createUserDto,
+      ...audit,
+      status,
+    });
 
     return await createdUser.save();
   }
 
   async findAll({ limit, offset, fields }: IQueryParams) {
     return await this.userModel
-      .find()
+      .find(this.statusFilter)
       .limit(limit)
       .skip(offset)
       .select(fields)
@@ -41,6 +46,7 @@ export class UsersRepository {
   async findOne(_id: string) {
     const query = {
       _id,
+      ...this.statusFilter,
     };
     return await this.userModel.findOne(query).exec();
   }
@@ -48,9 +54,10 @@ export class UsersRepository {
   async updateUserById(_id: string, data: UserUpdateDto) {
     const query = {
       _id,
+      ...this.statusFilter,
     };
     return await this.userModel
-      .findByIdAndUpdate(query, data, { new: true })
+      .findOneAndUpdate(query, data, { new: true })
       .exec();
   }
 }

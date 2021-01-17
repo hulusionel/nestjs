@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { Statuses } from '../tools/interfaces';
+import { Statuses } from '../constants';
 
 @Schema({
   timestamps: true,

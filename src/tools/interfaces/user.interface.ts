@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 import { AuditModel, RoleModel } from 'tools/models';
-import { Statuses } from './statuses.interface';
+import { Statuses } from '../../constants';
 
 export interface IUser extends Document {
   name: string;

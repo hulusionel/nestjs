@@ -1,4 +1,4 @@
-import { Roles } from '../interfaces';
+import { Roles } from '../../constants';
 import { AuditModel } from './audit.model';
 
 export class RoleModel {
